@@ -1,4 +1,4 @@
-name: Jer.info
+name: JSer.info
 on:
   schedule:
     - cron: '*/15 * * * *'
@@ -21,7 +21,7 @@ jobs:
           key: feed-cache-${{ steps.generate-key.outputs.cache-key }}
           restore-keys: feed-cache-
 
-      - name: Jewschool.com
+      - name: JSer.info
         uses: 'jser/mastofeedbot@main'
         with:
           rss-feed: https://jser.info/rss/
