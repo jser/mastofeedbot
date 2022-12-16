@@ -81,12 +81,7 @@ async function filterCachedItems(rss: FeedEntry[], cache: string[]): Promise<Fee
 async function getRss(rssFeed: string): Promise<FeedEntry[] | void> {
   let rss: FeedEntry[];
   try {
-    rss = <FeedEntry[]>(
-      await read(rssFeed, {
-        descriptionMaxLen: 500,
-        normalization: false
-      })
-    ).entries;
+    rss = <FeedEntry[]>(await read(rssFeed)).entries;
     core.debug(JSON.stringify(`Pre-filter feed items:\n\n${JSON.stringify(rss, null, 2)}`));
     return rss;
   } catch (e) {
