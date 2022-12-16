@@ -28,6 +28,7 @@ jobs:
           api-endpoint: https://mstdn.jp
           api-token: ${{ secrets.JSER_MASTODON_TOKEN }}
           cache-file: ${{ github.workspace }}/mastofeedbot/cache.json
+          status-template: "{{title}}\n{{link}}\n\n{{description}}"
 
   jser:
     runs-on: ubuntu-latest
