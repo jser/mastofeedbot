@@ -51,7 +51,7 @@ async function postItems(
       const status = statusTemplate
         .replace(/{{title}}/g, item.title ?? '')
         .replace(/{{link}}/g, item.link ?? '')
-        .replace(/{{description}}/g, item.description ?? '')
+        .replace(/{{description}}/g, item.description ?? '');
       // post the item
       const res = await masto.statuses.create({
         status: status,
@@ -81,7 +81,12 @@ async function filterCachedItems(rss: FeedEntry[], cache: string[]): Promise<Fee
 async function getRss(rssFeed: string): Promise<FeedEntry[] | void> {
   let rss: FeedEntry[];
   try {
-    rss = <FeedEntry[]>(await read(rssFeed)).entries;
+    rss = <FeedEntry[]>(
+      await read(rssFeed, {
+        descriptionMaxLen: 500,
+        normalization: false
+      })
+    ).entries;
     core.debug(JSON.stringify(`Pre-filter feed items:\n\n${JSON.stringify(rss, null, 2)}`));
     return rss;
   } catch (e) {

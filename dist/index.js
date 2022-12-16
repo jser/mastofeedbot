@@ -33,7 +33,7 @@ Support boolean input list: \`true | True | TRUE | false | False | FALSE\``)}N.g
 
 ${JSON.stringify(l,null,2)}`),a.push(p)}catch(p){B.setFailed(`Failed to post item: ${p.message}`)}}async function IN(e,t){return t.length&&(e=e==null?void 0:e.filter(r=>{let a=new Kt().hash(r.link);return!t.includes(a)})),B.debug(JSON.stringify(`Post-filter feed items:
 
-${JSON.stringify(e,null,2)}`)),e}async function jN(e){let t;try{return t=(await O5(e)).entries,B.debug(JSON.stringify(`Pre-filter feed items:
+${JSON.stringify(e,null,2)}`)),e}async function jN(e){let t;try{return t=(await O5(e,{descriptionMaxLen:500,normalization:!1})).entries,B.debug(JSON.stringify(`Pre-filter feed items:
 
 ${JSON.stringify(t,null,2)}`)),t}catch(r){B.setFailed(`Failed to parse RSS feed: ${r.message}`)}}async function kN(e){let t=[];try{return t=JSON.parse(await RN(e,"utf-8")),B.debug(`Cache: ${JSON.stringify(t)}`),t}catch{return B.notice(`Cache file not found. Creating new cache file at ${e}.`),t}}async function LN(){let e=B.getInput("rss-feed");B.debug(`rssFeed: ${e}`);let t=B.getInput("api-endpoint");B.debug(`apiEndpoint: ${t}`);let r=B.getInput("api-token");B.debug(`apiToken: ${r}`);let a=B.getInput("cache-file");B.debug(`cacheFile: ${a}`);let i=parseInt(B.getInput("cache-limit"),10);B.debug(`cacheLimit: ${i}`);let n=B.getInput("status-template")??`{{title}}
 {{link}}`,s=await jN(e),p=await kN(a);s=await IN(s,p),await qN(t,r,s,p,n),await PN(a,i,p)}(async()=>await LN())();export{LN as main};
