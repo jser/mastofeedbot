@@ -48,7 +48,10 @@ async function postItems(
       const hash = <string>new SHA256Hash().hash(<string>item.link);
       core.debug(`Posting ${item.title} with hash ${hash}`);
 
-      const status = statusTemplate.replace(/{{title}}/g, item.title ?? '').replace(/{{link}}/g, item.link ?? '');
+      const status = statusTemplate
+        .replace(/{{title}}/g, item.title ?? '')
+        .replace(/{{link}}/g, item.link ?? '')
+        .replace(/{{description}}/g, item.description ?? '')
       // post the item
       const res = await masto.statuses.create({
         status: status,
