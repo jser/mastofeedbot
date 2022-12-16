@@ -45,7 +45,7 @@ async function postItems(apiEndpoint: string, apiToken: string, rss: FeedEntry[]
       // post the item
       const res = await masto.statuses.create({
         status: `${item.title} ${item.link}`,
-        visibility: 'public'
+        visibility: 'unlisted'
       });
       core.debug(`Response:\n\n${JSON.stringify(res, null, 2)}`);
 
