@@ -21,6 +21,9 @@ inputs:
   api-token:
     description: 'Mastodon access token'
     required: true
+  status-template:
+    description: 'status template. Default {{title}}\n{{link}}'
+    required: false
 runs:
   using: 'node16'
   main: 'dist/index.js'
