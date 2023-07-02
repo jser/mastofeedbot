@@ -30,6 +30,10 @@ async function postItems(
   cache: string[],
   statusTemplate: string
 ) {
+  if (rss.length === 0) {
+    console.log('No new items to post.');
+    return;
+  }
   // authenticate with mastodon
   let masto: MastoClient;
   try {
